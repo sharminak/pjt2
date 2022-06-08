@@ -1,1 +1,1 @@
-web : gunicorn pjt2.wsgi --log-file -
+web : python app.py
