@@ -1,0 +1,28 @@
+#pip install streamlit
+#pip install pandas
+#pip install sklearn
+1echo "python-3.10" > runtime.txt
+
+
+
+# IMPORT STATEMENTS
+
+
+
+import pandas as pd
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.express as px
+from sklearn.preprocessing import LabelEncoder
+from plotly.subplots import make_subplots
+
+from sklearn.metrics import f1_score, confusion_matrix, accuracy_score, classification_report
+from sklearn.metrics import plot_confusion_matrix
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+import seaborn as sns
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
