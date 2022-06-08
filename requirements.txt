@@ -1,7 +1,7 @@
 #pip install streamlit
 #pip install pandas
 #pip install sklearn
-echo "python-3.10" > runtime.txt
+
 
 
 
