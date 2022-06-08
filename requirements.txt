@@ -6,7 +6,7 @@
 
 
 # IMPORT STATEMENTS
-gunicorn -b :5000 --access-logfile - --error-logfile - pjt2:app
+#gunicorn -b :5000 --access-logfile - --error-logfile - pjt2:app
 
 
 
