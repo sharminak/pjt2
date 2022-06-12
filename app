@@ -92,37 +92,46 @@ df_corr_bar = abs(df.corr()['Outcome']).sort_values()[:-1]
 fig = px.bar(df_corr_bar, orientation='h', color_discrete_sequence =['#4285f4']*len(df_corr_bar))
 fig.update_layout(showlegend=False)
 st.plotly_chart(fig)
+st.markdown('##')
 
 # BOX PLOTS
+
 st.text('Outcome vs Blood Pressure')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="BloodPressure", data=df)
 st.pyplot(fig)
+st.markdown('##')
 
 st.text('Outcome vs Glucose')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="Glucose", data=df)
 st.pyplot(fig)
+st.markdown('##')
 
 st.text('Outcome vs BMI')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="BMI", data=df)
 st.pyplot(fig)
+st.markdown('##')
 
 st.text('Outcome vs Age')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="Age", data=df)
 st.pyplot(fig)
+st.markdown('##')
 
 st.text('Outcome vs Insulin')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="Insulin", data=df)
 st.pyplot(fig)
+st.markdown('##')
 
 st.text('Outcome vs DiabetesPedigreeFunction')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="DiabetesPedigreeFunction", data=df)
 st.pyplot(fig)
+st.markdown('##')
+
 st.text('Outcome vs SkinThickness')
 fig, ax=plt.subplots()
 sns.boxplot(x="Outcome", y="SkinThickness", data=df)
@@ -161,7 +170,7 @@ user_data = user_report()
 st.header('SVM')
 SVM=SVC(kernel='linear')
 SVM.fit(x_train, y_train)
-
+user_result = SVM.predict(user_data)
 # CLASSIFICATION REPORT FOR SVM
 y_pred1 = SVM.predict(x_test)
 SVM = [accuracy_score(y_test,y_pred1), f1_score(y_test,y_pred1, average='weighted')]
@@ -171,70 +180,3 @@ st.markdown('###')
 # CONFUSION MATRIX FOR SVM
 st.subheader('Confusion Matrix')
 fig, ax=plt.subplots()
-cm1 = confusion_matrix(y_test, y_pred1)
-ax = sns.heatmap(cm1, annot=True, 
-            cmap='Blues')
-ax.set_title('Seaborn Confusion Matrix with labels\n\n');
-ax.set_xlabel('\nPredicted Values')
-ax.set_ylabel('Actual Values ');
-ax.xaxis.set_ticklabels(['False','True'])
-ax.yaxis.set_ticklabels(['False','True'])
-st.pyplot(fig)
-st.markdown('###')
-# RANDOM FOREST
-st.header('RANDOM FOREST')
-RF=RandomForestClassifier()
-RF.fit(x_train,y_train)
-user_result = RF.predict(user_data)
-# CLASSIFICATION REPORT FOR RANDOM FOREST
-y_pred2 = RF.predict(x_test)
-RF = [accuracy_score(y_test,y_pred2), f1_score(y_test,y_pred2, average='weighted')]
-c_report=(classification_report(y_test,y_pred2))
-st.text('Classification Report:\n' + c_report)
-st.markdown('##')
-# CONFUSION MATRIX FOR RANDOM FOREST
-st.subheader('Confusion Matrix')
-fig, ax=plt.subplots()
-cm1 = confusion_matrix(y_test, y_pred2)
-ax = sns.heatmap(cm1, annot=True, 
-            cmap='Blues')
-ax.set_title('Seaborn Confusion Matrix with labels\n\n');
-ax.set_xlabel('\nPredicted Values')
-ax.set_ylabel('Actual Values ');
-ax.xaxis.set_ticklabels(['False','True'])
-ax.yaxis.set_ticklabels(['False','True'])
-st.pyplot(fig)
-
-# MODELS COMPARISON
-st.header('\t\tAccuracy Comparison for Models')
-accuracy_SVM=accuracy_score(y_test,y_pred1)
-accuracy_RF=accuracy_score(y_test,y_pred2)
-models=[('Support Vector Machine(linear)',accuracy_SVM),
-        ('Random Forest',accuracy_RF)]
-predict=pd.DataFrame(data=models,columns=['Model','Accuracy'])
-st.write(predict)
-
-
-
-
-
-
-
-# COLOR FUNCTION
-if user_result[0]==0:
-    color = 'blue'
-else:
-    color = 'red'
-
-
-# OUTPUT
-st.subheader('Your Report: ')
-output=''
-if user_result[0]==0:
-    output = 'You are not Diabetic'
-else:
-    output = 'You are Diabetic'
-st.subheader(output)
-#st.text('Accuracy: ')
-#st.write(str(accuracy_score(y_test, SVM.predict(x_test))*100)+'%')
-
